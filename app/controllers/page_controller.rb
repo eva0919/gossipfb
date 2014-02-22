@@ -12,7 +12,7 @@ class PageController < ApplicationController
  #  end
 
   	def index
-  		useDB = true
+  		useDB = false
   		
   		@access_token = rest_graph.access_token
   		puts @access_token
@@ -66,8 +66,9 @@ class PageController < ApplicationController
 				# @fql = @graph.fql_query(sql)
 				# puts @fql
 			end
+			# render :json => @pictures_arr.to_json
 		else
-			redirect_to "/login"
+			# redirect_to "/login"
   		end
 
 
