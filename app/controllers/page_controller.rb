@@ -25,6 +25,7 @@ class PageController < ApplicationController
    		url = "https://graph.facebook.com/100001724550434?fields=feed&access_token=#{@access_token}"
      	data = open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
      	json_data = JSON.parse(data)
+     	puts "\n\n  >>>>>>  \n\n"
      	puts json_data.to_json
       # puts "\n\n    >>>>>>>>>>>>>  \n\n"
    #    @graph = Koala::Facebook::API.new(@access_token)
