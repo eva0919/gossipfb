@@ -4,11 +4,12 @@ Web::Application.routes.draw do
 
   root :to => "page#index", :as => :root
   get "/test" => "page#test"
-  get "/new" => 'sessions#new', :as => :signin
+  # get "/new" => 'sessions#new', :as => :signin
   match '/auth/:provider/callback' => 'sessions#create'
-  get '/login' => 'page#login'
-  get '/logout' => 'page#logout'
-  get '/checkin' => 'page#checkin'
+  get '/login'   => 'page#login'
+  get '/logout'  => 'page#logout'
+  get '/get_time/:user_id' => 'page#get_time'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

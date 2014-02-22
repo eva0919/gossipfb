@@ -1,84 +1,152 @@
 class PageController < ApplicationController
-  require 'net/http'
-  require "open-uri"
-  include RestGraph::RailsUtil
-  before_filter :login_facebook, :only => [:login]
-  before_filter :load_facebook, :except => [:login]
+	include RestGraph::RailsUtil
+	before_filter :login_facebook, :only => [:login]
+	before_filter :load_facebook, :except => [:login]
 
-  def index
-    @access_token = rest_graph.access_token
+	# before_filter :parse_facebook_cookies
+ #  def parse_facebook_cookies
+ #    @facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
+  
+ #    # If you've setup a configuration file as shown above then you can just do
+ #    # @facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
+ #  end
 
-    if @access_token
-    	# @me = rest_graph.get('100001152400388',:fields=>"feed")
-   #    # @me = rest_graph.get('/100001724550434/posts')
-   #    puts "\n\n    >>>>>>>>>>>>>  \n\n"
-   # #    @id = "100001724550434"
-   # #    @limit = 50
-	  # # # sql = "SELECT post_id, message, created_time FROM stream WHERE source_id = #{@id} AND message AND (type = 46 OR type = 80 OR type = 128 OR type = 247 OR type = 237 OR type = 257 OR type = 285) LIMIT #{@limit}"
-   # #    sql = "SELECT text FROM comment WHERE fromid = #{@id} "
-   # #    # @me = rest_graph.fql(sql)
-   # 	  @d = @me["feed"]["paging"]["previous"]
-   # 	  puts @d.split("&").each do {|x|
-   # 	  	if x.include? ""
-   # 	  }
-   #    puts 
-   		url = "https://graph.facebook.com/100001724550434?fields=feed&access_token=#{@access_token}"
-     	data = open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
-     	json_data = JSON.parse(data)
-     	puts "\n\n  >>>>>>  \n\n"
-     	puts json_data.to_json
-      # puts "\n\n    >>>>>>>>>>>>>  \n\n"
-   #    @graph = Koala::Facebook::API.new(@access_token)
-   #    @fql = @graph.fql_query(sql)
-   #    puts @fql
-   #   # url_t = "https://graph.facebook.com/100001724550434?fields=posts&access_token=#{@access_token}"
-   #   # url = URI.parse(url_t)
-   #   # req = Net::HTTP::Get.new(url.path)
-   #   # res = Net::HTTP.start(url.host, url.port) {|http|
-   #   #   http.request(req)
-   #   # }
-   #   # puts res.body
-    else
-    	redirect_to "/login"
+  	def index
+  		useDB = true
+  		
+  		@access_token = rest_graph.access_token
+  		puts @access_token
+  		puts "------------------------start-----------------------"
+  		if @access_token
+	  		if useDB
+	  			@DBdata = JSON.parse( File.read("#{Rails.root}/vendor/firend_list.json") )
+	  			@DBdata.each do |x|
+	  				puts x
+	  			end
+	  		else
+	  		
+		      	# @me = rest_graph.get('/me')
+		      	# puts @me
+		      	#### Mike // 找尋使用者的friend list 以下是針對做資料處理 block data 有兩個index  => name,id
+
+		      	@i = 0 
+		      	@friends = rest_graph.get('/me/friends').first
+		      	@pictures_arr = []
+		      	@friends[1].each do |data|
+		      		pictures = Hash.new 
+		      		pictures["id"] = data["id"].to_s
+		      		pictures["name"] = data["name"].to_s
+		      		pictures["pictures_url"] = rest_graph.get("#{pictures["id"]}", :fields=>'picture')['picture']['data']['url']
+		      		@pictures_arr.append(pictures)
+		      		@i = @i + 1
+		      		if @i > 10
+		      			break
+		      		end
+		      		# puts data["id"]
+		      		# puts "  **  "
+
+		      	end
+		      	puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n\n"
+		      	# puts rest_graph.get('hsiao.annedoo', :fields=>'posts')
+		      	# puts rest_graph.get("#{pretty_girl}",:fields=>"photos")
+		      	# sleep(1)
+		      	puts @pictures_arr
+		      	
+		      	
+		      	# puts rest_graph.get(pretty_girl, :fields=>'feed')
+		      	# puts rest_graph.get("#{pretty_girl}/feed")
+		      	puts "----------------------end-----------------------"
+		  #     	@id = "100001724550434"
+				# @limit = 50
+				# sql = "SELECT post_id, message, created_time FROM stream WHERE source_id = #{@id} AND message AND (type = 46 OR type = 80 OR type = 128 OR type = 247 OR type = 237 OR type = 257 OR type = 285) LIMIT #{@limit}"
+				# # sql = "SELECT name, description, is_deprecated FROM table WHERE 1"
+				# # @me = rest_graph.fql(sql)
+				# # puts @me
+				# @graph = Koala::Facebook::API.new(@access_token)
+				# @fql = @graph.fql_query(sql)
+				# puts @fql
+			end
+		else
+			redirect_to "/login"
+  		end
+
+
+
+
+	    
+ #    if session[:token]
+ #    	puts ">>>>>>>>>>>><<<<<<<<<<<<<<<<>>>>>>>>>>>>>>><<<<<<<<<<<<<"
+	# 	@graph = Koala::Facebook::API.new(session[:token])
+	# 	# puts @graph.get_object("me")
+	# 	profile = @graph.get_object("me")
+	# 	friends = @graph.get_connections("me", "friends")
+	# 	# @graph.put_connections("me", "feed", :message => "I am writing on my wall!")
+	# 	# a =  @graph.get_object(friends[0]["id"])
+	# 	# puts @graph.get_picture(friends[0]["id"])
+	# 	puts @graph.get_object( "me", friends[0]["id"].to_s+"/photos")
+
+	# else
+	#    redirect_to	'/new'
+	# end
     end
-	
 
-  end
+    def get_time
+    	puts "   >>>>start  "
+    	@access_token = rest_graph.access_token
+    	pretty_girl_id = params[:user_id]
+    	# pretty_girl_id = user_id
+    	@photo_time = []
+    	@post_time = []
+		if @access_token
+			puts pretty_girl_id
+			@photo_time = rest_graph.get("#{pretty_girl_id}/photos", :fields=>'created_time')
+			# puts @photo_time["data"]
+			@post_time = rest_graph.get("#{pretty_girl_id}/posts", :fields=>'created_time')
+			# puts @post_time["data"]
+		else
+			puts "wrong"
+			redirect_to '/login'
+		end
+		@DateCount = Array.new(12){0}
 
-  def login
-    redirect_to '/'
-  end
+		@photo_time["data"].each do | x |
+			
+			@DateCount[ (( Time.parse(x["created_time"]).hour ).to_i / 2).to_i ] += 1
+		end 
 
-  def logout
-    reset_session
-    redirect_to '/'
-  end
+		@post_time["data"].each do | x |
+			
+			@DateCount[ (( Time.parse(x["created_time"]).hour ).to_i / 2).to_i ] += 1
+		end 
+		
+		puts @DateCount
+		puts "   >>>>end  "
 
-  def checkin
-    unless rest_graph.access_token.nil?
-      # logged in
-      place_id = "152222568167545"
-      location = { :latitude => "25.019588", :longitude => "121.541722" }
-      tag = ""
-      message = "La la la!"
-      rest_graph.post('/me/checkins', :place => place_id,
-                                      :coordinates => location,
-                                      :tags => tag,
-                                      :message => message)
     end
 
-    redirect_to '/', :notice => 'Checked in CCSP!'
-  end
+    def login
+	    redirect_to '/'
+	end
 
-private
-  def load_facebook
-    rest_graph_setup(:write_session => true)
-  end
+	def logout
+	    reset_session
+	    redirect_to '/'
+	end
 
-  def login_facebook
-    rest_graph_setup(:auto_authorize         => true,
-                     :auto_authorize_scope   => 'publish_checkins',
-                     :ensure_authorized      => true,
-                     :write_session          => true)
-  end
-end
+
+	private
+	  def load_facebook
+	    rest_graph_setup(:write_session => true)
+	  end
+
+	  def login_facebook
+	    rest_graph_setup(:auto_authorize         => true,
+	                     :auto_authorize_scope   => 'read_friendlists, publish_stream',
+	                     :ensure_authorized      => true,
+	                     :write_session          => true)
+	  end  	
+	end
+# end
+
+
+
