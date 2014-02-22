@@ -22,13 +22,20 @@
 	            </div>
 	            <div id="demo"></div>
 	        </div>
-	        <div class="six wide column">
+            <div class="six wide column">
+                <div id="friends-wall"></div>
 	        </div>
 	    </div>
 	</div>
+	<script src="assets/func.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
-	    getTempData();
+        var data = getTempData();
+        for (var i=0; i<data.length; i++) {
+            $("#friends-wall").append("<img title='" + data[i]["name"] + "' src='" + data[i]["url"] + "'></img>");
+        }
+        $( document ).tooltip();
 	});
-</script>
+	</script>
+
 <% end %>

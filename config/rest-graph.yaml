@@ -1,12 +1,12 @@
 development:
-    app_id: "652487931453416"
-    secret: '30a5edfb49121fdc5a09a59e58e7461a'
-    callback_host: 'http://140.112.42.114:3000'
+    app_id: "221538331384686"
+    secret: 'c080d526359709c934444dfd805c2719'
+    callback_host: 'http://localhost:3000'
 test:
-    app_id: "652487931453416"
-    secret: '30a5edfb49121fdc5a09a59e58e7461a'
-    callback_host: 'http://140.112.42.114:3000'
+    app_id: "221538331384686"
+    secret: 'c080d526359709c934444dfd805c2719'
+    callback_host: 'http://localhost:3000'
 production:
-    app_id: '652487931453416'
-    secret: '30a5edfb49121fdc5a09a59e58e7461a'
-    callback_host: 'http://140.112.42.114:3000'
+    app_id: "221538331384686"
+    secret: 'c080d526359709c934444dfd805c2719'
+    callback_host: 'http://localhost:3000'

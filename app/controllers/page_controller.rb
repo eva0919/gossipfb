@@ -39,7 +39,7 @@ class PageController < ApplicationController
 		      		pictures["pictures_url"] = rest_graph.get("#{pictures["id"]}", :fields=>'picture')['picture']['data']['url']
 		      		@pictures_arr.append(pictures)
 		      		@i = @i + 1
-		      		if @i > 10
+		      		if @i > 50
 		      			break
 		      		end
 		      		# puts data["id"]
