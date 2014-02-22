@@ -18,7 +18,6 @@
 	        </div>
 	        <div class="ten wide column">
 	            <div id="chart">
-	                <img class="chart" src="assets/chart.jpg"></img>
 	            </div>
 	            <div id="demo"></div>
 	        </div>
@@ -34,7 +33,8 @@
         for (var i=0; i<data.length; i++) {
             $("#friends-wall").append("<img title='" + data[i]["name"] + "' src='" + data[i]["url"] + "'></img>");
         }
-        $( document ).tooltip();
+        drawChart();
+        drawBar();
 	});
 	</script>
 

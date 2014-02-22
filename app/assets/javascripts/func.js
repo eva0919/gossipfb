@@ -1,4 +1,51 @@
 function drawChart() {
+    $('#chart').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '朋友出沒時間分布圖'
+        },
+        subtitle: {
+            text: '瞧瞧他在哪？'
+        },
+        xAxis: {
+            categories: ['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16-18', '18-20', '20-22', '22-24'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '出現頻率',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' 次'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Your Friend',
+            data: [107, 31, 635, 203, 2, 25, 245, 345, 135, 25, 34, 25]
+        }]
+    });
+}
+
+function drawBar() {
     d3.json("assets/checkin.json", function(data) {
         var width = 640, height = 100;
         var margin = {top: 5, right: 10, bottom: 20, left: 10};
@@ -28,14 +75,9 @@ function drawChart() {
             .orient("bottom");
         svg.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(" + 0 + "," + height + ")")
+            .attr("transform", "translate(" + 0 + "," + 0 + ")")
             .call(xAxis);
     });
 
 
 }
-
-
-$(document).ready(function() {
-    drawChart();
-});

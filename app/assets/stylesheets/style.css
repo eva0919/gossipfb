@@ -1,5 +1,7 @@
 body {
+    background-image:url(bg.png);
     margin: 0;
+    width: 100%;
 }
 
 /* Axis Style */
