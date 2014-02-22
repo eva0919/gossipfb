@@ -1,24 +1,43 @@
-<div class="container">
-    <div class="ui grid">
-        <div class="sixteen wide column">
-            <h1 class="ui dividing header">Gossip FB</h1>
-        </div>
-        <div class="ten wide column">
-            <div id="chart">
-                <img class="chart" src="assets/chart.jpg"></img>
-            </div>
-            <div id="demo"></div>
-        </div>
-        <div class="six wide column">
-            <div class="ui selection dropdown">
-                <input type="hidden" name="gender">
-                <div class="text">Female</div>
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <div class="item" data-value="1">Male</div>
-                    <div class="item active" data-value="0">Female</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<% unless @access_token %>
+<form name="input" action="/login" method="get">
+	<button name="button" type="submit">Button</button>
+</form>
+<% else%>
+	<div id="temp">
+	<% @index = 0 %>
+	<% @pictures_arr.each do | data |%>
+		<div class="temp_data_<%=@index%>" enid="<%= data['id']%>" enname="<%= data['name']%>" enurl="<%= data['pictures_url']%>"></div>
+		<% @index = @index + 1%>
+	<%end%>
+	<div class="temp_count" encount="<%=@index%>"></div>
+	</div>
+	<div class="container">
+	    <div class="ui grid">
+	        <div class="sixteen wide column">
+	            <h1 class="ui dividing header">Gossip FB</h1>
+	        </div>
+	        <div class="ten wide column">
+	            <div id="chart">
+	                <img class="chart" src="assets/chart.jpg"></img>
+	            </div>
+	            <div id="demo"></div>
+	        </div>
+	        <div class="six wide column">
+	            <div class="ui selection dropdown">
+	                <input type="hidden" name="gender">
+	                <div class="text">Female</div>
+	                <i class="dropdown icon"></i>
+	                <div class="menu">
+	                    <div class="item" data-value="1">Male</div>
+	                    <div class="item active" data-value="0">Female</div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    getTempData();
+	});
+</script>
+<% end %>
