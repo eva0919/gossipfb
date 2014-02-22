@@ -9,9 +9,13 @@ function getTempData(){
 		id_arr.push($(text).attr("enid") );
 		url_arr.push($(text).attr("enurl") );
 	};
+	console.log(i);
 	$("#temp").remove();
 	// friend list
 	console.log(url_arr);
 	console.log(name_arr);
 	console.log(id_arr);
+
+
+
 }
