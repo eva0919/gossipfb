@@ -8,7 +8,8 @@ Web::Application.routes.draw do
   match '/auth/:provider/callback' => 'sessions#create'
   get '/login'   => 'page#login'
   get '/logout'  => 'page#logout'
-  get '/get_time/:user_id' => 'page#get_time'
+  get '/get_time' => 'page#get_time'
+  get '/test' => 'page#test'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
