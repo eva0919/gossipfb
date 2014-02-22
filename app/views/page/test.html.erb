@@ -1,1 +1,25 @@
 YOYO
+<script type="text/javascript">
+	$(document).ready(function () {
+	   // $('#submitBtn').click(function (){
+	   	var tt;
+	         $.ajax({
+	         url: "/get_time",
+	         cache: false,
+	         // dataType: 'html',
+	         type:'GET',
+	         data: { user_id: "100000739262977" },
+	         error: function(xhr) {
+	           alert('Ajax request 發生錯誤');
+	         },
+	         success: function(data) {
+	            // tt = data;
+	            // $("body").append(tt);
+	            console.log(data)
+	         }
+	     });
+	  // });
+	});
+</script>
+
+

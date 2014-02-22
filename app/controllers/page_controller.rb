@@ -101,9 +101,9 @@ class PageController < ApplicationController
 		if @access_token
 			puts pretty_girl_id
 			@photo_time = rest_graph.get("#{pretty_girl_id}/photos", :fields=>'created_time')
-			# puts @photo_time["data"]
+			puts @photo_time["data"]
 			@post_time = rest_graph.get("#{pretty_girl_id}/posts", :fields=>'created_time')
-			# puts @post_time["data"]
+			puts @post_time["data"]
 		else
 			puts "wrong"
 			redirect_to '/login'
@@ -122,6 +122,8 @@ class PageController < ApplicationController
 		
 		puts @DateCount
 		puts "   >>>>end  "
+		render :json => @DateCount.to_json
+		# render :text => "ya"
 
     end
 
@@ -133,7 +135,6 @@ class PageController < ApplicationController
 	    reset_session
 	    redirect_to '/'
 	end
-
 
 	private
 	  def load_facebook
