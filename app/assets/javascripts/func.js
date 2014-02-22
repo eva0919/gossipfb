@@ -37,9 +37,5 @@ function drawChart() {
 
 
 $(document).ready(function() {
-<<<<<<< HEAD
-=======
-   
->>>>>>> 0c6dca1824fe56d8967eac153eed2e210c6f6e0b
     drawChart();
 });
