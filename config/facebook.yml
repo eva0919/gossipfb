@@ -1,0 +1,9 @@
+development:
+    app_id: '221538331384686'
+    secret_key: 'c080d526359709c934444dfd805c2719'
+test:
+    app_id: '221538331384686'
+    secret_key: c080d526359709c934444dfd805c2719'
+production:
+    app_id: '221538331384686'
+    secret_key: 'c080d526359709c934444dfd805c2719'
