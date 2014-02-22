@@ -1,3 +1,6 @@
+body {
+    margin: 0;
+}
 /* Axis Style */
 .axis path,
 .axis line {
@@ -9,4 +12,14 @@
     fill: black;
     font-family: sans-serif;
     font-size: 10px;
+}
+
+.container {
+    position: relative;
+    margin: 0px auto;
+    width: 1000px;
+}
+
+.chart {
+    width: 640px;
 }

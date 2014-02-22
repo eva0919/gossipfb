@@ -10,4 +10,3 @@ production:
     app_id: '221538331384686'
     secret: 'c080d526359709c934444dfd805c2719'
     callback_host: 'http://localhost:3000/'
-
