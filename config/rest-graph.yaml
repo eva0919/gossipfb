@@ -1,0 +1,12 @@
+development:
+    app_id: '221538331384686'
+    secret: 'c080d526359709c934444dfd805c2719'
+    callback_host: 'localhost:3000'
+test:
+    app_id: '221538331384686'
+    secret: c080d526359709c934444dfd805c2719'
+    callback_host: 'localhost:3000'
+production:
+    app_id: '221538331384686'
+    secret: 'c080d526359709c934444dfd805c2719'
+    callback_host: 'localhost:3000'
