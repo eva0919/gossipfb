@@ -1,6 +1,7 @@
 body {
     margin: 0;
 }
+
 /* Axis Style */
 .axis path,
 .axis line {
@@ -22,4 +23,9 @@ body {
 
 .chart {
     width: 640px;
+}
+
+h1 {
+    font-size: 100px;
+    text-align: center;
 }
