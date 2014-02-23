@@ -94,13 +94,14 @@ class PageController < ApplicationController
     def get_time
     	puts "   >>>>start  "
     	@access_token = rest_graph.access_token
-    	pretty_girl_id = params[:user_id]
+    	pretty_girl_id = params[:user_id].to_s
     	# pretty_girl_id = user_id
     	@photo_time = []
     	@post_time = []
 		if @access_token
 			puts pretty_girl_id
 			@photo_time = rest_graph.get("#{pretty_girl_id}/photos", :fields=>'created_time')
+			puts @photo_time
 			puts @photo_time["data"]
 			@post_time = rest_graph.get("#{pretty_girl_id}/posts", :fields=>'created_time')
 			puts @post_time["data"]
