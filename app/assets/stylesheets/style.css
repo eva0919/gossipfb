@@ -1,5 +1,4 @@
 body {
-    background-image:url(bg2.png);
     margin: 0;
     width: 100%;
     background-size: cover;
@@ -29,8 +28,13 @@ body {
 }
 
 .title {
+    background: #2F0000;
+    color : #FFD306;
     font-size: 400%;
     text-align: center;
+    font-family: 'Georgia';
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 .highcharts-container {
@@ -49,4 +53,19 @@ body {
     border-bottom: 10px solid red;
     border-left: 10px solid red;
     content: "";
+}
+
+img:hover {
+    border: 2px solid red;
+    width: 46px;
+    height: 46px;
+    pointer: cursor;
+}
+
+#demo-msg {
+    text-align: center;
+}
+
+hr {
+    fill: #2F0000;
 }

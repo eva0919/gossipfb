@@ -7,12 +7,12 @@ function drawChart() {
             text: '朋友出沒時間分布圖'
         },
         subtitle: {
-            text: '瞧瞧他在哪？'
+            text: ''
         },
         xAxis: {
             categories: ['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16-18', '18-20', '20-22', '22-24'],
             title: {
-                text: null
+                text: ''
             }
         },
         yAxis: {
@@ -28,18 +28,14 @@ function drawChart() {
         tooltip: {
             valueSuffix: ' 次'
         },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
         credits: {
             enabled: false
         },
+        legend: {
+            enabled: false
+        },
         series: [{
-            name: 'Your Friend',
+            name: ' ',
             data: [220, 104, 74, 48, 106, 141, 170, 161, 195, 173, 206, 296]
         }]
     });
@@ -55,7 +51,7 @@ function drawBar(turn_data) {
           .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var color = ["#EBD3E8", "#E2C2DE", "#DABED5", "#D2A2CC", "#CA8EC2", "#C07AB8", "#B766AD", "#AE57A4", "#9F4D95", "#8F4586", "#7E3D76", "#6C3365"];
+    var color = ["#FFF3EE", "#FFDAC8", "#FFAD86", "#FF8F59", "#FF9224", "#F75000", "#D94605", "#BB3B00", "#9F5000", "#A23400", "#842B00", "#642100"];
 
     svg.selectAll("rect")
         .data(turn_data)
