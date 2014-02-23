@@ -28,11 +28,25 @@ body {
     width: 640px;
 }
 
-h1 {
-    font-size: 200%;
+.title {
+    font-size: 400%;
     text-align: center;
 }
+
 .highcharts-container {
     width: 50%;
     margin: 0 auto;
+}
+
+#friends-wall img.selected::after, #friends-wall img:hover::after
+{
+    position:absolute;
+    top: 0;
+    right:-25px;
+    bottom:0;
+
+    border-top: 10px solid red;
+    border-bottom: 10px solid red;
+    border-left: 10px solid red;
+    content: "";
 }
