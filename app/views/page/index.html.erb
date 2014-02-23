@@ -1,3 +1,26 @@
+<script type="text/javascript">
+	function doAjax(u_id){
+	   	var tt;
+	         $.ajax({
+	         url: "/get_time",
+	         cache: false,
+	         // dataType: 'html',
+	         type:'GET',
+	         data: { user_id: u_id },
+	         error: function(xhr) {
+	           alert('Ajax request 發生錯誤');
+	         },
+	         success: function(data) {
+	            // tt = data;
+	            // $("body").append(tt);
+	            console.log(data)
+	         }
+	     });
+	  // });
+		return 0 ;
+	};
+</script>
+
 <% unless @access_token %>
 <form name="input" action="/login" method="get">
 	<button name="button" type="submit">Button</button>
@@ -27,14 +50,34 @@
 	        </div>
 	    </div>
 	</div>
+	<!-- <div id="canvasloader-container" class="wrapper"></div> -->
 	<script src="assets/func.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
+		var turn = 0 ;
+		// var cl = new CanvasLoader('canvasloader-container');
+		// cl.setShape('spiral'); // default is 'oval'
+		// cl.setDiameter(104); // default is 40
+		// cl.setDensity(96); // default is 40
+		// cl.setRange(0.8); // default is 1.3
+		// cl.setSpeed(4); // default is 2
+		// cl.show();
         var data = getTempData();
         for (var i=0; i<data.length; i++) {
-            $("#friends-wall").append("<img title='" + data[i]["name"] + "' src='" + data[i]["url"] + "'></img>");
+            $("#friends-wall").append("<img title='" + data[i]["name"] + "' src='" + data[i]["url"] + "' enid = '"+ data[i]["id"]+"'></img>");
         }
+        $("#friends-wall img").click(function(){
+        	if(turn == 0){
+        		turn = 1 ; 
+	        	var u_id = $(this).attr("enid");
+	        	turn = doAjax(u_id);
+
+	        }
+
+        });
         $( document ).tooltip();
+
+        cl.hide();
 	});
 	</script>
 
