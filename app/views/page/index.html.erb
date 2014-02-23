@@ -88,15 +88,17 @@
 		<% @index = @index + 1%>
 	<%end%>
 	<div class="temp_count" encount="<%=@index%>"></div>
-	</div>
+    </div>
+    <div class="title">G o s s i p &nbsp F B</div>
 	<div class="container">
 	    <div class="ui grid">
 	        <div class="sixteen wide column">
-	            <div class="title">Gossip FB</div>
 	        </div>
 	        <div class="ten wide column">
 	            <div id="chart">
-	            </div>
+                </div>
+                <div class="ui inverted divider"></div>
+                <div id="demo-msg"></div>
 	            <div id="demo"></div>
 	        </div>
             <div class="six wide column">
@@ -116,6 +118,7 @@
 		// cl.setRange(0.8); // default is 1.3
 		// cl.setSpeed(4); // default is 2
         // cl.show();
+        $("#demo-msg").html("&nbsp");
         var data = getTempData();
         for (var i=0; i<data.length; i++) {
             $("#friends-wall").append("<img title='" + data[i]["name"] + "' src='" + data[i]["url"] + "' enid = '"+ data[i]["id"]+"'></img>");
@@ -127,10 +130,12 @@
         		turn = 1 ; 
 	        	var u_id = $(this).attr("enid");
                 turn = doAjax(u_id);
+                var friendsName = $(this).attr("title");
+                console.log($(this));
+                $("#demo-msg").html(friendsName + " 的出沒時間");
 	     //   }
 
         });
-
         //cl.hide();
 	});
 	</script>
