@@ -2,6 +2,7 @@ body {
     background-image:url(bg.png);
     margin: 0;
     width: 100%;
+    background-size: cover;
 }
 
 /* Axis Style */
@@ -30,4 +31,8 @@ body {
 h1 {
     font-size: 100px;
     text-align: center;
+}
+.highcharts-container {
+    width: 50%;
+    margin: 0 auto;
 }
