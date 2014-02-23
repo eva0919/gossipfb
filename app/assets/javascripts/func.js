@@ -48,7 +48,7 @@ function drawChart() {
 function drawBar() {
     d3.json("assets/checkin.json", function(data) {
         var width = 600, height = 100;
-        var margin = {top: 10, right: 0, bottom: 20, left: 0};
+        var margin = {top: 10, right: 15, bottom: 20, left: 10};
         var svg = d3.select("#demo").append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -64,10 +64,10 @@ function drawBar() {
             .append("rect")
             .attr("width", (width-margin.left-margin.right)/12)
             .attr("height", 50)
-            .attr("x", function(i, d) {console.log(i);return d*(width-margin.left-margin.right)/12;})
+            .attr("x", function(i, d) {console.log(i);return d*(width-margin.right)/12;})
             .attr("fill", function(i, d) {console.log(i); return i;});
 
-        var xScale = d3.scale.ordinal().domain(["0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24"]).rangePoints([0, width]);
+        var xScale = d3.scale.ordinal().domain(["0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24"]).rangePoints([0, width-margin.right]);
 
         var xAxis = d3.svg.axis()
             .scale(xScale)
